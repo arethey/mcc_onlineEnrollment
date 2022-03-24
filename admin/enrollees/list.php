@@ -8,7 +8,10 @@
 <div class="row">
       <div class="col-lg-12">
        	 <div class="col-lg-6">
-            <h1 class="page-header">New Enrollees</h1>
+            <h2 class="page-header">
+				<span>New Enrollees</span>
+			<a href="index.php?view=newEnrollee" class="btn btn-primary btn-xs  ">  <i class="fa fa-plus-circle fw-fa"></i> New</a>
+			</h2>
        		</div>
        		
        		</div>

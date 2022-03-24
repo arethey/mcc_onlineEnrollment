@@ -1,4 +1,4 @@
- <form action="" method="POST">
+<form action="" method="POST">
      <!-- Main content -->
      <!-- title row -->
      <div class="row">
@@ -233,7 +233,7 @@
      <!-- /.row -->
 
  </form>
- <form action="ListStudentPrint.php" method="POST" target="_blank">
+ <form action="report/ListStudentPrint.php" method="POST" target="_blank">
      <input type="hidden" name="Course" value="<?php echo (isset($_POST['Course'])) ? $_POST['Course'] : ''; ?>">
      <input type="hidden" name="Semester" value="<?php echo (isset($_POST['Semester'])) ? $_POST['Semester'] : ''; ?> ">
      <input type="hidden" name="SY" value="<?php echo (isset($_POST['SY'])) ? $_POST['SY'] : ''; ?> ">

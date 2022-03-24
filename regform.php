@@ -49,8 +49,8 @@ if($userStud){
 
 	$age = date_diff(date_create($_SESSION['BIRTHDATE']),date_create('today'))->y;
 
-    if ($age < 15){
-       message("Cannot Proceed. Must be 15 years old and above to enroll.", "error");
+    if ($age < 17){
+       message("Cannot Proceed. Must be 17 years old and above to enroll.", "error");
        redirect("index.php?q=enrol");
 
     }else{

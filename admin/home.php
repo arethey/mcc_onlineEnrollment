@@ -54,7 +54,7 @@
         <div class="panel panel-info">
             <div class="panel-heading">Total Male Students</div>
             <div class="panel-body">
-                <h1 style='text-align:center'><?php echo count($allMaleStudents) ?></h1>
+                <h1 id="maleStudent" style='text-align:center'><?php echo count($allMaleStudents) ?></h1>
             </div>
         </div>
     </div>
@@ -62,11 +62,43 @@
         <div class="panel panel-info">
             <div class="panel-heading">Total Female Students</div>
             <div class="panel-body">
-                <h1 style='text-align:center'><?php echo count($allFemaleStudents) ?></h1>
+                <h1 id="femaleStudent" style='text-align:center'><?php echo count($allFemaleStudents) ?></h1>
             </div>
         </div>
     </div>
 </div>
 
-<?php include('./report/ListStudents.php') ?>
+<div class="panel panel-info">
+    <div class="panel-body">
+        <div id="piechart_3d" style="height: 500px"></div>
+    </div>
 </div>
+
+<?php include('homeListStudents.php') ?>
+</div>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+          const male = document.getElementById("maleStudent");
+          const female = document.getElementById("femaleStudent");
+          console.log(male.textContent)
+          console.log(female.textContent)
+
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['Male',     +male.textContent],
+          ['Female', +female.textContent]
+        ]);
+
+        var options = {
+          title: 'Students',
+          is3D: true,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+        chart.draw(data, options);
+      }
+    </script>

@@ -33,6 +33,9 @@ switch ($view) {
  case 'success' :
 		$content    = 'success.php';		
 		break;
+		case 'newEnrollee' :
+			$content    = 'newEnrollee.php';		
+			break;
 	default :
 		$content    = 'list.php';		
 }
