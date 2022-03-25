@@ -38,7 +38,13 @@
 				  <tbody>
 				  	<?php  //`IDNO`, `FNAME`, `LNAME`, `MNAME`, `SEX`, `BDAY`, `BPLACE`,
 				  	// `STATUS`, `AGE`, `NATIONALITY`, `RELIGION`, `CONTACT_NO`, `HOME_ADD`, `EMAIL`, `student_status`
-				  		$mydb->setQuery("SELECT * FROM `tblstudent` s,course c WHERE s.COURSE_ID=c.COURSE_ID AND  NewEnrollees=0");
+					  
+					  if(isset($_GET['sex']) && !empty($_GET['sex'])){
+						  $sex = $_GET['sex'];
+						$mydb->setQuery("SELECT * FROM `tblstudent` s,course c WHERE s.SEX = '".$sex."' AND s.COURSE_ID=c.COURSE_ID AND  NewEnrollees=0");
+					  }else{
+						$mydb->setQuery("SELECT * FROM `tblstudent` s,course c WHERE s.COURSE_ID=c.COURSE_ID AND  NewEnrollees=0");
+					  }
 
 				  		$cur = $mydb->loadResultList();
 

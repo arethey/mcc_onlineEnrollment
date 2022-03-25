@@ -44,7 +44,7 @@
 <div class='row'>
     <div class='col-md-4'>
         <div class="panel panel-info">
-            <div class="panel-heading">Total Students</div>
+            <div class="panel-heading"><a href="student/index.php">Total Students</a></div>
             <div class="panel-body">
                 <h1 style='text-align:center'><?php echo count($allStudents) ?></h1>
             </div>
@@ -52,7 +52,7 @@
     </div>
     <div class='col-md-4'>
         <div class="panel panel-info">
-            <div class="panel-heading">Total Male Students</div>
+            <div class="panel-heading"><a href="student/index.php?sex=male">Total Male Students</a></div>
             <div class="panel-body">
                 <h1 id="maleStudent" style='text-align:center'><?php echo count($allMaleStudents) ?></h1>
             </div>
@@ -60,7 +60,7 @@
     </div>
     <div class='col-md-4'>
         <div class="panel panel-info">
-            <div class="panel-heading">Total Female Students</div>
+            <div class="panel-heading"><a href="student/index.php?sex=female">Total Female Students</a></div>
             <div class="panel-body">
                 <h1 id="femaleStudent" style='text-align:center'><?php echo count($allFemaleStudents) ?></h1>
             </div>

@@ -10,6 +10,10 @@ switch ($action) {
 	case 'add' :
 	doInsert();
 	break;
+
+	case 'import' :
+		doImport();
+		break;
 	
 	case 'edit' :
 	doEdit();
@@ -172,6 +176,84 @@ switch ($action) {
 		// }
 		}
 
+	}
+
+	function doImport(){
+		global $mydb;
+
+		if(isset($_POST['import'])){
+			$fileName = $_FILES['file']['tmp_name'];
+   
+			if($_FILES['file']['size'] > 0){
+				$file = fopen($fileName, 'r');
+   
+				$startAtLine = 0;
+				$counter = 0;
+				while(($column = fgetcsv($file, 10000, ",")) !== FALSE){
+					// if(++$counter<$startAtLine) continue;
+					$counter++;
+					
+					if($counter == 2){
+						$TIME_FROM = $column[0];
+						$TIME_TO = $column[1];
+						$sched_day = $column[2];
+						$sched_semester = $column[3];
+						$sched_room = $column[4];
+						$SECTION = $column[5];
+						$COURSE_ID = $column[6];
+						$SUBJ_ID = $column[7];
+						$INST_ID = $column[8];
+
+						$sql = "SELECT * FROM `tblschedule` 
+						WHERE `SUBJ_ID`=".$SUBJ_ID." AND `COURSE_ID`=".$COURSE_ID." AND sched_semester='" .$sched_semester."'";
+						$result = mysqli_query($mydb->conn,$sql) or die(mysqli_error());
+						$maxrows = mysqli_num_rows($result);
+
+						if ($maxrows > 0 ) {
+							# code...
+							message("The subject has already a schedule.","error");
+							redirect('index.php');
+						}else{
+							$query ="SELECT * 
+							FROM  `tblschedule` 
+							WHERE  `TIME_FROM` >=  '".$TIME_FROM."'
+							AND  `TIME_TO` <=  '".$TIME_TO."'
+							AND  `TIME_FROM` <=  `TIME_TO` AND sched_day='".$sched_day."' 
+							AND (sched_room ='" .$sched_room. "' OR INST_ID=".$INST_ID.")";
+							
+							$result = mysqli_query($mydb->conn,$query) or die(mysqli_errno($mydb->conn));
+
+							$numrow = mysqli_num_rows($result);
+
+							if ($numrow > 0) {
+								# code...
+								message("Instructor is not available or Room is already occupied with the time you have set.","error");
+								redirect('index.php');
+							}else{
+								$nextyear =  date("Y") + 1;
+								$currentyear =  date("Y");
+
+								$sched = New Schedule(); 
+								$sched->sched_time 		= $TIME_FROM .'-'.$TIME_TO;
+								$sched->TIME_FROM 		= $TIME_FROM;
+								$sched->TIME_TO 		= $TIME_TO;
+								$sched->sched_day		= $sched_day; 
+								$sched->sched_semester 	= $sched_semester;
+								$sched->sched_sy		= $currentyear . '-'.$nextyear;  
+								$sched->sched_room		= $sched_room;
+								$sched->SUBJ_ID			= $SUBJ_ID;
+								$sched->SECTION			= $SECTION;
+								$sched->COURSE_ID		= $COURSE_ID;
+								$sched->INST_ID 		= $INST_ID;
+								$sched->create();
+								message("New Schedule imported successfully!", "success");
+								redirect("index.php");
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 
 	function doEdit(){
