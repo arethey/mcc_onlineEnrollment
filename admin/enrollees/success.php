@@ -87,7 +87,7 @@ $_SESSION['SY'] = $sy;
       </thead>
       <tbody>
       <?php  
-        $totunit = '';
+        $totunit = 0;
           if (isset($_SESSION['admingvCart'])){
 
 
