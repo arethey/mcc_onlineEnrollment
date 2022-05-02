@@ -11,6 +11,7 @@
             <h2 class="page-header">
 				<span>New Enrollees</span>
 			<a href="index.php?view=newEnrollee" class="btn btn-primary btn-xs  ">  <i class="fa fa-plus-circle fw-fa"></i> New</a>
+			<a href="index.php?view=transferee" class="btn btn-primary btn-xs  ">  <i class="fa fa-plus-circle fw-fa"></i> Transferee</a>
 			</h2>
        		</div>
        		
